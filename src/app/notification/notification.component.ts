@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, interval, of, timer } from 'rxjs';
+import { BehaviorSubject, EMPTY, interval } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -18,7 +18,7 @@ export class NotificationComponent implements OnInit {
         switchMap((enabled) =>
           enabled
             ? interval(this.ticks).pipe(map((_) => this.timer$.value + 1))
-            : of(this.timer$.value)
+            : EMPTY
         )
       )
       .subscribe((timer) => this.timer$.next(timer));
